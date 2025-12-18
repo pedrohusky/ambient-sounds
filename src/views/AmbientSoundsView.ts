@@ -75,18 +75,25 @@ export class AmbientSoundsView implements vscode.WebviewViewProvider {
           this.sendPlayerState(webviewView.webview);
           break;
         case "playSound":
-          // Comando para tocar som - delegar ao AudioPlayer
+          // Comando para tocar som (agora suporta múltiplos)
           await this.audioPlayer.play(message.id, message.url, message.name || message.id);
           this.sendPlayerState(webviewView.webview);
           break;
-        case "stopSound":
-          // Comando para parar som
-          this.audioPlayer.stop();
+        case "stopTrack":
+          // Parar uma track específica
+          this.audioPlayer.stop(message.id);
           this.sendPlayerState(webviewView.webview);
           break;
-        case "setVolume":
-          // Comando para ajustar volume
-          this.audioPlayer.setVolume(message.volume);
+        case "stopAllTracks":
+          // Parar todas as tracks
+          this.audioPlayer.stopAll();
+          this.sendPlayerState(webviewView.webview);
+          break;
+        case "setTrackVolume":
+          // Ajustar volume de uma track específica
+          this.audioPlayer.setVolume(message.id, message.volume);
+          // Não enviamos o estado de volta imediatamente para evitar loop de UI se for slider dragging
+          // mas talvez seja bom confirmar
           break;
         case "getPlayerState":
           // Webview solicitando estado do player
@@ -97,12 +104,10 @@ export class AmbientSoundsView implements vscode.WebviewViewProvider {
   }
 
   private sendPlayerState(webview: vscode.Webview) {
-    const state = this.audioPlayer.getState();
+    const tracks = this.audioPlayer.getTracksState();
     webview.postMessage({
       command: "playerState",
-      isPlaying: state.isPlaying,
-      currentSound: state.currentSound,
-      volume: state.volume
+      tracks: tracks
     });
   }
 
@@ -335,13 +340,9 @@ export class AmbientSoundsView implements vscode.WebviewViewProvider {
         </header>
 
         <div id="player-controls">
-          <div id="now-playing"></div>
+          <div id="active-tracks"></div>
           <div class="controls-row">
-            <div class="volume-control">
-              <!--<span>🔊</span>-->
-              <input id="volume" type="range" min="0" max="100" value="50" />
-            </div>
-            <button id="stop-btn" disabled>Parar</button>
+            <button id="stop-btn" disabled>Parar Todos</button>
           </div>
         </div>
 

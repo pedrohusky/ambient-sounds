@@ -20,7 +20,7 @@ export function deactivate() {
   // Parar áudio ao desativar a extensão
   try {
     const audioPlayer = AudioPlayer.getInstance();
-    audioPlayer.stop();
+    audioPlayer.stopAll();
   } catch (e) {
     // AudioPlayer pode não ter sido inicializado
   }
