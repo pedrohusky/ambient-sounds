@@ -2,7 +2,7 @@
   "name": "ambient-sounds",
   "displayName": "Ambient Sounds",
   "description": "Play ambient sounds while you code",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "publisher": "pedrohusky",
   "engines": {
     "vscode": "^1.85.0"
