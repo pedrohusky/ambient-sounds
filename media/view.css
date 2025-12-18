@@ -1,0 +1,356 @@
+/* Reset e base - seguindo padrão VS Code */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--vscode-font-family, "Segoe WPC", "Segoe UI", sans-serif);
+  font-size: var(--vscode-font-size, 13px);
+  font-weight: var(--vscode-font-weight, 400);
+  background: transparent;
+  color: var(--vscode-foreground);
+  padding: 0;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Header com input de busca */
+header {
+  padding: 8px 12px;
+}
+
+#search {
+  width: 100%;
+  padding: 4px 8px;
+  border-radius: 2px;
+  border: 1px solid var(--vscode-input-border, transparent);
+  background: var(--vscode-input-background);
+  color: var(--vscode-input-foreground);
+  font-size: var(--vscode-font-size, 13px);
+  font-family: inherit;
+  outline: none;
+}
+
+#search::placeholder {
+  color: var(--vscode-input-placeholderForeground);
+}
+
+#search:focus {
+  border-color: var(--vscode-focusBorder);
+}
+
+/* Seletor de categorias */
+#category-select {
+  width: 100%;
+  padding: 4px 8px;
+  margin-bottom: 8px;
+  border-radius: 2px;
+  border: 1px solid var(--vscode-input-border, transparent);
+  background: var(--vscode-input-background);
+  color: var(--vscode-input-foreground);
+  font-size: var(--vscode-font-size, 13px);
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+#category-select:focus {
+  border-color: var(--vscode-focusBorder);
+}
+
+#category-select option {
+  background: var(--vscode-dropdown-background, var(--vscode-input-background));
+  color: var(--vscode-dropdown-foreground, var(--vscode-input-foreground));
+}
+
+/* Controles do player */
+#player-controls {
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.controls-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.volume-control span {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Range slider nativo do VS Code */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 4px;
+  background: var(--vscode-scrollbarSlider-background);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--vscode-scrollbarSlider-activeBackground);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  transform: scale(1.2);
+  background: var(--vscode-scrollbarSlider-activeBackground);
+}
+
+/* Indicador de música tocando */
+#now-playing {
+  display: none;
+  font-size: 12px;
+  color: var(--vscode-foreground);
+  opacity: 0.9;
+  padding-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+#now-playing.active {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.now-playing-icon {
+  color: var(--vscode-charts-green, #89d185);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Botão secundário estilo VS Code */
+#stop-btn {
+  padding: 4px 12px;
+  border: 1px solid var(--vscode-button-secondaryBackground, rgba(255,255,255,0.1));
+  background: var(--vscode-button-secondaryBackground);
+  color: var(--vscode-button-secondaryForeground);
+  cursor: pointer;
+  border-radius: 2px;
+  font-size: 12px;
+  font-family: inherit;
+  transition: background 0.1s, opacity 0.15s;
+}
+
+#stop-btn:hover:not(:disabled) {
+  background: var(--vscode-button-secondaryHoverBackground);
+}
+
+#stop-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Indicador de fonte */
+#source-indicator {
+  padding: 4px 12px;
+  font-size: 11px;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Lista de sons - estilo árvore do VS Code */
+#list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#list li {
+  padding: 4px 12px;
+  min-height: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#list li:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+
+#list li.playing {
+  background: var(--vscode-list-activeSelectionBackground);
+  color: var(--vscode-list-activeSelectionForeground);
+}
+
+#list li span {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+}
+
+/* Ícone de play antes do nome */
+#list li::before {
+  content: "▶";
+  font-size: 8px;
+  opacity: 0.5;
+  margin-right: 6px;
+}
+
+#list li.playing::before {
+  content: "▶";
+  opacity: 1;
+  color: var(--vscode-charts-green, #89d185);
+}
+
+
+
+/* Botão de favorito */
+.favorite-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 6px;
+  opacity: 0.6;
+  transition: opacity 0.15s, transform 0.1s;
+  line-height: 1;
+  color: var(--vscode-foreground);
+  flex-shrink: 0;
+}
+
+.favorite-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.favorite-btn.active {
+  opacity: 1;
+  color: var(--vscode-editorWarning-foreground, #cca700);
+}
+
+/* Seção de favoritos - estilo de seção do VS Code */
+#favorites-section {
+  margin-top: 8px;
+  border-top: 1px solid var(--vscode-sideBarSectionHeader-border, transparent);
+}
+
+#favorites-section h3 {
+  margin: 0;
+  padding: 8px 12px 4px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--vscode-sideBarSectionHeader-foreground);
+  background: var(--vscode-sideBarSectionHeader-background);
+}
+
+#favorites-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#favorites-list:empty {
+  display: none;
+}
+
+#favorites-list:empty + .empty-message,
+#favorites-section:has(#favorites-list:empty)::after {
+  content: "";
+}
+
+/* Mensagem quando não há favoritos */
+.favorites-empty {
+  padding: 8px 12px;
+  font-size: 12px;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+#favorites-list li {
+  padding: 4px 12px;
+  min-height: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+#favorites-list li:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+
+#favorites-list li span {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Scrollbar estilo VS Code */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vscode-scrollbarSlider-background);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vscode-scrollbarSlider-hoverBackground);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--vscode-scrollbarSlider-activeBackground);
+}
+
+/* Audio element hidden */
+#player {
+  display: none;
+}
+
+/* Botão de carregar mais */
+.load-more {
+  text-align: center;
+  padding: 8px 12px !important;
+  opacity: 0.7;
+  font-size: 12px;
+}
+
+.load-more:hover {
+  opacity: 1;
+  background: var(--vscode-list-hoverBackground);
+}
+
+.load-more::before {
+  content: none !important;
+}

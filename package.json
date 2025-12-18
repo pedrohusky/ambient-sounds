@@ -1,0 +1,49 @@
+{
+  "name": "ambient-sounds",
+  "displayName": "Ambient Sounds",
+  "description": "Play ambient sounds while you code",
+  "version": "0.0.10",
+  "publisher": "pedrohusky",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pedrohusky/ambient-sounds"
+  },
+  "icon": "icon.png",
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ambientSounds",
+          "title": "Ambient Sounds",
+          "icon": "$(music)"
+        }
+      ]
+    },
+    "views": {
+      "ambientSounds": [
+        {
+          "id": "ambientSounds.view",
+          "name": "Player",
+          "type": "webview"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.3"
+  }
+}
