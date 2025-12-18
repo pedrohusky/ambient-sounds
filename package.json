@@ -31,7 +31,8 @@
         {
           "id": "ambientSounds.view",
           "name": "Player",
-          "type": "webview"
+          "type": "webview",
+          "retainContextWhenHidden": true
         }
       ]
     }

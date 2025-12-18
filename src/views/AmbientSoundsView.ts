@@ -3,6 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as https from "https";
 import * as http from "http";
+import { AudioPlayer } from "../AudioPlayer";
 
 // Configuração da API
 // Em desenvolvimento: http://localhost:3333
@@ -32,10 +33,16 @@ interface Pagination {
 
 export class AmbientSoundsView implements vscode.WebviewViewProvider {
   public static readonly viewType = "ambientSounds.view";
+  private webviewView: vscode.WebviewView | null = null;
 
-  constructor(private readonly context: vscode.ExtensionContext) {}
+  constructor(
+    private readonly context: vscode.ExtensionContext,
+    private readonly audioPlayer: AudioPlayer
+  ) {}
 
   resolveWebviewView(webviewView: vscode.WebviewView) {
+    this.webviewView = webviewView;
+    
     webviewView.webview.options = {
       enableScripts: true,
       localResourceRoots: [this.context.extensionUri],
@@ -64,8 +71,38 @@ export class AmbientSoundsView implements vscode.WebviewViewProvider {
           // Webview está pronto, enviar categorias e dados iniciais
           await this.sendCategories(webviewView.webview);
           await this.sendSounds(webviewView.webview, 1, 20, "", "", false);
+          // Enviar estado atual do player
+          this.sendPlayerState(webviewView.webview);
+          break;
+        case "playSound":
+          // Comando para tocar som - delegar ao AudioPlayer
+          await this.audioPlayer.play(message.id, message.url, message.name || message.id);
+          this.sendPlayerState(webviewView.webview);
+          break;
+        case "stopSound":
+          // Comando para parar som
+          this.audioPlayer.stop();
+          this.sendPlayerState(webviewView.webview);
+          break;
+        case "setVolume":
+          // Comando para ajustar volume
+          this.audioPlayer.setVolume(message.volume);
+          break;
+        case "getPlayerState":
+          // Webview solicitando estado do player
+          this.sendPlayerState(webviewView.webview);
           break;
       }
+    });
+  }
+
+  private sendPlayerState(webview: vscode.Webview) {
+    const state = this.audioPlayer.getState();
+    webview.postMessage({
+      command: "playerState",
+      isPlaying: state.isPlaying,
+      currentSound: state.currentSound,
+      volume: state.volume
     });
   }
 

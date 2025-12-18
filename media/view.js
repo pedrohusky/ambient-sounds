@@ -376,6 +376,36 @@ window.addEventListener("message", (event) => {
     categories = message.categories || [];
     updateCategorySelect();
     saveState();
+  } else if (message.command === "playerState") {
+    // Sincronizar estado do player com o backend
+    const wasPlaying = currentPlaying;
+    currentPlaying = message.currentSound?.id || null;
+    
+    // Atualizar UI
+    if (message.isPlaying && currentPlaying) {
+      stopBtn.disabled = false;
+      stopBtn.textContent = t.stopPlaying;
+      updateNowPlaying(currentPlaying);
+    } else {
+      stopBtn.disabled = true;
+      stopBtn.textContent = t.stop;
+      updateNowPlaying(null);
+    }
+    
+    // Atualizar classes playing
+    document.querySelectorAll("#list li, #favorites-list li").forEach(li => {
+      li.classList.remove("playing");
+      if (li.dataset.sound === currentPlaying) {
+        li.classList.add("playing");
+      }
+    });
+    
+    // Atualizar volume
+    if (message.volume !== undefined) {
+      volumeControl.value = message.volume;
+    }
+    
+    saveState();
   }
 });
 
@@ -460,32 +490,39 @@ function formatSoundName(name) {
 }
 
 function playSound(id, url) {
-  // Remover classe playing de todos
+  // Encontrar nome do som
+  const sound = allSounds.find(s => s.id === id) || favorites.find(f => f.id === id);
+  const name = sound ? (sound.name || formatSoundName(id)) : formatSoundName(id);
+  
+  // Enviar comando para extensão (o áudio será tocado no backend Node.js)
+  vscode.postMessage({ 
+    command: "playSound", 
+    id: id, 
+    url: url,
+    name: name
+  });
+  
+  // Atualização visual otimista (será confirmada pelo playerState)
   document.querySelectorAll("#list li, #favorites-list li").forEach(li => {
     li.classList.remove("playing");
   });
-  
-  // Adicionar classe ao item atual
   const currentItem = document.querySelector(`#list li[data-sound="${id}"]`);
   if (currentItem) {
     currentItem.classList.add("playing");
   }
   
   currentPlaying = id;
-  audio.src = url;
-  audio.volume = volumeControl.value / 100;
-  audio.play();
-  saveState();
-  
-  // Atualizar estado do botão e nome do som tocando
   stopBtn.disabled = false;
   stopBtn.textContent = t.stopPlaying;
   updateNowPlaying(id);
+  saveState();
 }
 
 function stopSound() {
-  audio.pause();
-  audio.currentTime = 0;
+  // Enviar comando para extensão
+  vscode.postMessage({ command: "stopSound" });
+  
+  // Atualização visual otimista
   currentPlaying = null;
   stopBtn.disabled = true;
   stopBtn.textContent = t.stop;
@@ -591,7 +628,8 @@ function updateCategorySelect() {
 
 // Controles
 volumeControl.addEventListener("input", () => {
-  audio.volume = volumeControl.value / 100;
+  // Enviar volume para extensão
+  vscode.postMessage({ command: "setVolume", volume: parseInt(volumeControl.value) });
 });
 
 stopBtn.addEventListener("click", stopSound);
@@ -625,8 +663,6 @@ search.addEventListener("input", () => {
   }, 300);
 });
 
-// Quando o áudio termina
-audio.addEventListener("ended", () => {
-  // Loop está ativo, então não deve chegar aqui
-});
+// Solicitar estado inicial do player ao carregar
+vscode.postMessage({ command: "getPlayerState" });
 
