@@ -4,9 +4,8 @@
   <img src="icon.png" alt="Ambient Sounds Logo" width="128" height="128">
 </p>
 
-
 <p align="center">
-  <strong>Relaxe e foque melhor enquanto programa com sons ambiente imersivos.</strong>
+  <strong>Relax and focus better while coding with immersive ambient sounds.</strong>
 </p>
 
 <p align="center">
@@ -23,86 +22,74 @@
 
 ---
 
-## ✨ Funcionalidades
+## ✨ Features
 
-- 🎵 **Biblioteca de Sons** — Acesse uma vasta coleção de sons ambiente diretamente no VS Code
-- 🔊 **Controle de Volume** — Ajuste o volume do áudio sem sair do editor
-- ⭐ **Favoritos** — Salve seus sons preferidos para acesso rápido
-- 🔄 **Loop Contínuo** — Os sons tocam em loop para uma experiência ininterrupta
-- 🔍 **Busca Inteligente** — Encontre rapidamente o som perfeito para o momento
-- 🌐 **API Remota + Fallback Local** — Sons carregados da nuvem com fallback para arquivos locais
-- 🎨 **Interface Nativa** — Design que segue perfeitamente o tema do VS Code
-
----
-
-## 📦 Instalação
-
-1. Abra o **VS Code**
-2. Vá para **Extensions** (`Ctrl+Shift+X`)
-3. Pesquise por **"Ambient Sounds"**
-4. Clique em **Install**
-
-Ou instale diretamente pelo [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=pedrohusky.ambient-sounds).
+- 🎵 **Sound Library** — Access a vast collection of ambient sounds directly in VS Code (available sounds being added slowly)
+- 🎛️ **Multi-track Playback** — Play multiple sounds simultaneously to create the perfect atmosphere
+- 🔊 **Volume Control** — Adjust audio volume without leaving the editor
+- ⭐ **Favorites** — Save your favorite sounds for quick access
+- 🔄 **Continuous Loop** — Sounds play in a loop for an uninterrupted experience
+- 🔍 **Smart Search** — Quickly find the perfect sound for the moment
+- 🌐 **Remote API + Local Fallback** — Sounds loaded from the cloud with fallback to local files
+- 🎨 **Native Interface** — Design that perfectly matches the VS Code theme
 
 ---
 
-## 🚀 Como Usar
+## 📦 Installation
 
-1. Clique no ícone **🎵** na barra lateral esquerda (Activity Bar)
-2. Escolha um som da lista
-3. Ajuste o volume conforme preferir
-4. Clique em ⭐ para adicionar aos favoritos
-5. Use o botão **Parar** para interromper a reprodução
+1. Open **VS Code**
+2. Go to **Extensions** (`Ctrl+Shift+X`)
+3. Search for **"Ambient Sounds"**
+4. Click **Install**
 
----
-
-## 🎼 Sons Disponíveis
-
-A extensão oferece uma variedade de sons ambiente, incluindo:
-
-| Categoria | Exemplos |
-|-----------|----------|
-| 🌧️ **Natureza** | Chuva, Trovões, Floresta, Ondas do Mar |
-| 🔥 **Relaxamento** | Lareira, Vento, Pássaros |
-| ☕ **Ambientes** | Café, Escritório, Biblioteca |
-| 🌌 **Atmosféricos** | Ruído Branco, Ruído Rosa, Espaço |
+Or install directly through the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=pedrohusky.ambient-sounds).
 
 ---
 
-## ⚙️ Requisitos
+## 🚀 How to Use
 
-- VS Code versão **1.85.0** ou superior
-
----
-
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! Sinta-se à vontade para:
-
-1. 🍴 Fazer um fork do projeto
-2. 🌿 Criar uma branch (`git checkout -b feature/nova-funcionalidade`)
-3. 💾 Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
-4. 📤 Push para a branch (`git push origin feature/nova-funcionalidade`)
-5. 🔃 Abrir um Pull Request
+1. Click the **🎵** icon in the left sidebar (Activity Bar)
+2. Choose sounds from the list (you can run multiple sounds simultaneously to create the best atmosphere)
+3. Adjust the volume as you prefer
+4. Click ⭐ to add to favorites
+5. Use the **Stop** button to interrupt playback
 
 ---
 
-## 📄 Licença
+## ⚙️ Requirements
 
-Este projeto está licenciado sob a [MIT License](LICENSE.md).
+- VS Code version **1.85.0** or higher
 
 ---
 
-## 💖 Apoie o Projeto
+## 🤝 Contributing
 
-Se você gosta da extensão, considere:
+Contributions are welcome! Feel free to:
 
-- ⭐ Dar uma estrela no [GitHub](https://github.com/pedrohusky/ambient-sounds)
-- 📝 Deixar uma avaliação no [Marketplace](https://marketplace.visualstudio.com/items?itemName=pedrohusky.ambient-sounds)
-- 🐛 Reportar bugs ou sugerir melhorias nas [Issues](https://github.com/pedrohusky/ambient-sounds/issues)
+1. 🍴 Fork the project
+2. 🌿 Create a branch (`git checkout -b feature/new-feature`)
+3. 💾 Commit your changes (`git commit -m 'Add new feature'`)
+4. 📤 Push to the branch (`git push origin feature/new-feature`)
+5. 🔃 Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE.md).
+
+---
+
+## 💖 Support the Project
+
+If you like the extension, consider:
+
+- ⭐ Giving a star on [GitHub](https://github.com/pedrohusky/ambient-sounds)
+- 📝 Leaving a review on the [Marketplace](https://marketplace.visualstudio.com/items?itemName=pedrohusky.ambient-sounds)
+- 🐛 Reporting bugs or suggesting improvements in [Issues](https://github.com/pedrohusky/ambient-sounds/issues)
 
 ---
 
 <p align="center">
-  Feito com ❤️ por <a href="https://github.com/pedrohusky">Pedro Husky</a>
+  Made with ❤️ by <a href="https://github.com/pedrohusky">Pedro Husky</a>
 </p>
